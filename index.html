@@ -5,13 +5,30 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>since</title>
-  <link rel="stylesheet" href="css/dist/style.css">
+  <style type="text/css">
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      margin: 0 auto;
+      padding: 1em 4em;
+    }
+  </style>
 </head>
 
 <body>
 <h1>since</h1>
+<p id="then">2018-01-01 00:00:00</p>
 <p id="since"></p>
 
-<script src="js/dist/scripts.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/moment-precise-range.js"></script>
+
+<script type="text/javascript">
+  var thenstr = document.getElementById("then").textContent;
+  var now = moment().format('YYYY-MM-DD HH:mm:ss');
+  var then = moment(thenstr,'YYYY-MM-DD HH:mm:ss');
+  var diff = moment.preciseDiff(now, then);
+  document.getElementById("since").textContent = diff;
+</script>
+
 </body>
 </html>
