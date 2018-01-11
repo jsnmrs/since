@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>since</title>
   <style type="text/css">
+    :root {
+      font-size: calc(1vw + 1vh + .5vmin);
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
       margin: 0 auto;
-      padding: 1em 4em;
-      display: flex;
-      align-items: center;
-      justify-content: space-evenly;
+      padding: 1em;
     }
     h1, p {
       line-height: 1;
@@ -21,17 +21,33 @@
     }
 
     h1 {
-      font-size: 8vw;
+      font-size: 64px;
+      text-align: center;
     }
     p {
-      font-size: 5vw;
-      max-width: 10em;
+      font-size: 2em;
+      margin: 1em;
+    }
+
+    @media screen and (min-width: 600px) {
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+      h1 {
+        font-size: 125px;
+      }
+      p {
+        font-size: 3em;
+        max-width: 10em;
+      }
     }
   </style>
 </head>
 
 <body>
-<h1 id="label">since</h1>
+<h1 id="label">since.</h1>
 <p id="since"></p>
 
 <script src="js/moment.js"></script>
