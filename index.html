@@ -10,24 +10,66 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
       margin: 0 auto;
       padding: 1em 4em;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    h1, p {
+      line-height: 1;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 8vw;
+    }
+    p {
+      font-size: 5vw;
+      max-width: 10em;
     }
   </style>
 </head>
 
 <body>
-<h1>since</h1>
-<p id="then">2018-01-01 00:00:00</p>
+<h1 id="label">since</h1>
 <p id="since"></p>
 
 <script src="js/moment.js"></script>
 <script src="js/moment-precise-range.js"></script>
 
 <script type="text/javascript">
-  var thenstr = document.getElementById("then").textContent;
-  var now = moment().format('YYYY-MM-DD HH:mm:ss');
-  var then = moment(thenstr,'YYYY-MM-DD HH:mm:ss');
-  var diff = moment.preciseDiff(now, then);
-  document.getElementById("since").textContent = diff;
+  var then;
+  var urlParams;
+
+  (window.onpopstate = function () {
+    var match,
+      pl     = /\+/g,  // Regex for replacing addition symbol with a space
+      search = /([^&=]+)=?([^&]*)/g,
+      decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+      query  = window.location.search.substring(1);
+
+    urlParams = {};
+    while (match = search.exec(query))
+      urlParams[decode(match[1])] = decode(match[2]);
+  })();
+
+  if (urlParams.then) {
+    then = moment(urlParams.then,'YYYY-MM-DD[T]HH:mm:ss');
+  }
+
+  if (urlParams.label) {
+    document.getElementById("label").textContent = urlParams.label;
+  }
+
+  liveCount();
+  function liveCount() {
+
+    var now = moment().format('YYYY-MM-DD HH:mm:ss');
+    var diff = moment.preciseDiff(now, then);
+    document.getElementById("since").textContent = diff;
+  }
+  setInterval(liveCount, 1000);
+
 </script>
 
 </body>
