@@ -75,6 +75,7 @@
 
   if (urlParams.label) {
     document.getElementById("label").textContent = urlParams.label;
+    document.title = document.title + " " + urlParams.label;
   }
 
   liveCount();
