@@ -13,6 +13,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
       margin: 0 auto;
       padding: 1em;
+      max-width: 35em;
     }
     h1, p {
       line-height: 1;
@@ -22,19 +23,32 @@
 
     h1 {
       font-size: 64px;
-      text-align: center;
     }
+
     p {
       font-size: 2em;
-      margin: 1em;
+    }
+
+    #example p {
+      font-size: 1em;
+      margin: 1em 0 .25em;
+    }
+
+    #label {
+      text-align: center;
+    }
+
+    a:link {
+      text-decoration: none;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+      margin: 0;
     }
 
     @media screen and (min-width: 600px) {
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-      }
       h1 {
         font-size: 125px;
       }
@@ -42,12 +56,28 @@
         font-size: 3em;
         max-width: 10em;
       }
+
+      #example {
+        font-size: 1em;
+      }
+
+      #label {
+        text-align: left;
+      }
     }
   </style>
 </head>
 
 <body>
-<h1 id="label">since.</h1>
+<h1 id="label"></h1>
+<div id="example">
+  <h1>since.</h1>
+  <ul>
+    <li><a href="?then=1776-07-04&label=🇺🇸">🇺🇸 Independence Day</a></li>
+    <li><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">🌋 Mount St. Helens eruption</a></li>
+    <li><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">🌖 First moon landing</a></li>
+  </ul>
+</div>
 <p id="since"></p>
 
 <script src="js/moment.js"></script>
@@ -75,6 +105,7 @@
 
   if (urlParams.label) {
     document.getElementById("label").textContent = urlParams.label;
+    document.getElementById("example").remove();
     document.title = document.title + " " + urlParams.label;
   }
 
