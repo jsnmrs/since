@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>since</title>
+  <title>since 📅</title>
+  
   <style type="text/css">
     :root {
       font-size: calc(1vw + 1vh + .5vmin);
@@ -84,17 +85,15 @@
 <script src="js/moment.js"></script>
 <script src="js/moment-precise-range.js"></script>
 
-<script type="text/javascript">
-  var then;
-  var urlParams;
+<script>
+  let then, urlParams;
 
   (window.onpopstate = function () {
-    var match,
-      pl     = /\+/g,  // Regex for replacing addition symbol with a space
-      search = /([^&=]+)=?([^&]*)/g,
-      decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-      query  = window.location.search.substring(1);
-
+    let match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
     urlParams = {};
     while (match = search.exec(query))
       urlParams[decode(match[1])] = decode(match[2]);
@@ -107,12 +106,12 @@
   if (urlParams.label) {
     document.getElementById("label").textContent = urlParams.label;
     document.getElementById("example").remove();
-    document.title = document.title + " " + urlParams.label;
+    document.title = "since " + urlParams.label;
   }
 
   liveCount();
-  function liveCount() {
 
+  function liveCount() {
     var now = moment().format('YYYY-MM-DD HH:mm:ss');
     var diff = moment.preciseDiff(now, then);
     document.getElementById("since").textContent = diff;
