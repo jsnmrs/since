@@ -2,123 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>since 📅</title>
-  
-  <style type="text/css">
-    :root {
-      font-size: calc(1vw + 1vh + .5vmin);
-    }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-      margin: 0 auto;
-      padding: 1em;
-      max-width: 35em;
-    }
-    h1, p {
-      line-height: 1;
-      margin: 0;
-      padding: 0;
-    }
-
-    h1 {
-      font-size: 64px;
-    }
-
-    p {
-      font-size: 2em;
-    }
-
-    #example p {
-      font-size: 1em;
-      margin: 1em 0 .25em;
-    }
-
-    #label {
-      text-align: center;
-    }
-
-    a:link {
-      text-decoration: none;
-    }
-
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    @media screen and (min-width: 600px) {
-      h1 {
-        font-size: 125px;
-      }
-      p {
-        font-size: 3em;
-        max-width: 10em;
-      }
-
-      #example {
-        font-size: 1em;
-      }
-
-      #label {
-        text-align: left;
-      }
-    }
+  <title>since</title>
+  <script src="https://unpkg.com/moment"></script>
+  <script src="https://unpkg.com/moment-precise-range-plugin"></script>
+  <style>
+    :root { font-size: calc(1.25vw + .5vh + .5vmin); }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; padding: 1em; }
+    h1, p { line-height: 1; margin: 0; padding: 0;}
+    h1 { font-size: 4em; }
+    p, li { font-size: 2em; }
+    ul { list-style-type: none; padding-left: 0; }
+    a:link, a:visited { color: #1a7db7; text-decoration: none; }
+    span { padding-left: .25em; }
+    @media screen and (min-width: 600px) { h1 { font-size: 6em; } }
   </style>
 </head>
-
 <body>
-<h1 id="label"></h1>
-<div id="example">
-  <h1>since.</h1>
-  <ul>
-    <li><a href="?then=1776-07-04&label=🇺🇸">🇺🇸 Independence Day</a></li>
-    <li><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">🌋 Mount St. Helens eruption</a></li>
-    <li><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">🌖 First moon landing</a></li>
-    <li><a href="?then=1955-11-12T20%3A04%3A00&label=⚡️🏛">⚡️🏛 Hill Valley clock tower lightning strike</a></li>
+  <h1 id="label">since.</h1>
+  <ul id="examples">
+    <li><a href="?then=1776-07-04&label=🇺🇸">🇺🇸 <span>Independence Day</span></a></li>
+    <li><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">🏛 <span>Hill Valley clock tower lightning strike</span></a></li>
+    <li><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">🌖 <span>First moon landing</span></a></li>
+    <li><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">🌋 <span>Mount St. Helens eruption</span></a></li>
+    <li><a href="?then=1993-05-23T21%3A22%3A00&label=🍻">🍻 <span>Final episode of <em>Cheers</em></span></a></li>
   </ul>
-</div>
-<p id="since"></p>
+  <p id="since"></p>
 
-<script src="js/moment.js"></script>
-<script src="js/moment-precise-range.js"></script>
+  <script>
+    let then,
+        earl,
+        format = 'YYYY-MM-DD[T]HH:mm:ss';
 
-<script>
-  let then, urlParams;
+    (window.onpopstate = function () {
+      let match,
+          plus   = /\+/g,
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace(plus, " ")); },
+          query  = window.location.search.substring(1);
+      earl = {};
+      while (match = search.exec(query))
+        earl[decode(match[1])] = decode(match[2]);
+    })();
 
-  (window.onpopstate = function () {
-    let match,
-        pl     = /\+/g,  // Regex for replacing addition symbol with a space
-        search = /([^&=]+)=?([^&]*)/g,
-        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-        query  = window.location.search.substring(1);
-    urlParams = {};
-    while (match = search.exec(query))
-      urlParams[decode(match[1])] = decode(match[2]);
-  })();
+    if (earl.then) {
+      then = moment(earl.then, format);
+    }
 
-  if (urlParams.then) {
-    then = moment(urlParams.then,'YYYY-MM-DD[T]HH:mm:ss');
-  }
+    if (earl.label) {
+      document.getElementById("label").textContent = earl.label;
+      document.getElementById("examples").remove();
+      document.title = document.title + " " + earl.label;
+    }
 
-  if (urlParams.label) {
-    document.getElementById("label").textContent = urlParams.label;
-    document.getElementById("example").remove();
-    document.title = "since " + urlParams.label;
-  }
+    liveCount();
 
-  liveCount();
-
-  function liveCount() {
-    var now = moment().format('YYYY-MM-DD HH:mm:ss');
-    var diff = moment.preciseDiff(now, then);
-    document.getElementById("since").textContent = diff;
-  }
-  setInterval(liveCount, 1000);
-
-</script>
-
+    function liveCount() {
+      let now = moment().format(format),
+          diff = moment.preciseDiff(now, then);
+      document.getElementById("since").textContent = diff;
+    }
+    setInterval(liveCount, 1000);
+  </script>
 </body>
 </html>
