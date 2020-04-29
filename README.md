@@ -1,7 +1,7 @@
 # since
 
 doing date math 📅  
-[https://jasonmorris.com/since/](https://jasonmorris.com/since/)
+[https://jsnmrs.github.io/since/](https://jsnmrs.github.io/since/)
 
 Using
 - [http://momentjs.com/](http://momentjs.com/)
