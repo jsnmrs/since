@@ -3,32 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>since</title>
+  <title>Since</title>
+  <meta name="description" content="Doing date math for all of those important moments.">
+  <meta name="author" content="Jason Morris">
   <link rel="preconnect" href="https://unpkg.com">
   <style>
-    :root { font-size: calc(1.25vw + .5vh + .5vmin); }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; padding: 1em; }
-    h1, p { line-height: 1; margin: 0; padding: 0;}
-    h1 { font-size: 4em; }
-    p, li { font-size: 2em; }
-    ul { list-style-type: none; padding-left: 0; }
-    a:link, a:visited { color: #1a7db7; display: inline-block; padding: 0.25em 0; }
-    span { padding-left: .25em; }
-    @media screen and (min-width: 600px) { h1 { font-size: 6em; } }
+    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{background-color:#f1f1f1;padding:1em}.faux-header{border-bottom:1px solid #ccc;margin-bottom:1.5em;}footer{border-top:1px solid #ccc;margin-top:1.5em;padding:3em 1em;}section{padding:0.25em 1em;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
+    .icon{font-size: 10rem;margin:0;line-height:1;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}
   </style>
 </head>
-<body></body>
+<body>
   <main>
-    <h1 id="label">since</h1>
-    <ul id="examples">
-      <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">Independence Day</a></li>
-      <li><span aria-hidden="true">🏛 </span><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">Hill Valley clock tower lightning strike</a></li>
-      <li><span aria-hidden="true">🌖 </span><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">First moon landing</a></li>
-      <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">Mount St. Helens eruption</a></li>
-      <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=🍻">Final episode of <em>Cheers</em></a></li>
-    </ul>
-    <p id="since"></p>
+    <div class="faux-header">
+      <h1>Since</h1>
+      <div class="info">
+        <p>Doing date math for all of those important moments.</p>
+      </div>
+    </div>
+    <section id="examples">
+      <p>Hack the URL of the examples that follow to create your own "since" to bookmark.</p>
+      <ul>
+        <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">Independence Day</a></li>
+        <li><span aria-hidden="true">🏛 </span><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">Hill Valley clock tower lightning strike</a></li>
+        <li><span aria-hidden="true">🌖 </span><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">First moon landing</a></li>
+        <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">Mount St. Helens eruption (1980)</a></li>
+        <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=🍻">Final episode of <em>Cheers</em></a></li>
+      </ul>
+    </section>
+    <section class="render" hidden>
+      <h2 class="icon"></h2>
+      <p class="since"></p>
+      <p><a href="./"><span aria-hidden="true">&larr;</span> back to Since</a></p>
+    </section>
   </main>
+  <footer><p>MIT Licensed. Read the <a href="https://jasonmorris.com/code/since/">Since blog post</a>. Source code on <a href="https://github.com/jsnmrs/since">GitHub</a>. Created by <a href="https://jasonmorris.com">Jason Morris</a>.</p></footer>
   <script src="https://unpkg.com/moment/min/moment.min.js"></script>
   <script src="moment-precise-range.js"></script>
   <script>
@@ -52,7 +60,8 @@
     }
 
     if (earl.label) {
-      document.getElementById("label").textContent = earl.label;
+      document.querySelector(".icon").textContent = earl.label;
+      document.querySelector(".render").removeAttribute("hidden");
       document.getElementById("examples").remove();
       document.title = document.title + " " + earl.label;
     }
@@ -62,7 +71,7 @@
     function liveCount() {
       let now = moment().format(format),
           diff = moment.preciseDiff(now, then);
-      document.getElementById("since").textContent = diff;
+      document.querySelector(".since").textContent = diff;
     }
     setInterval(liveCount, 1000);
   </script>
