@@ -1,6 +1,6 @@
 # Since
 
-Doing date math for all of those important moments. Hack the URL to create your own page and bookmark. 
+Doing date math for all of those important moments. Hack the URL to create your own page, then bookmark. 
 
 <https://jsnmrs.github.io/since/>
 
