@@ -4,7 +4,7 @@ Doing date math for all of those important moments. Hack the URL to create your 
 
 <https://jsnmrs.github.io/since/>
 
-A single HTML file. Vanilla JS — no dependencies. Calendar-aware date math derived from [`moment-precise-range`](https://github.com/codebox/moment-precise-range). Read the [Since blog post](https://jasonmorris.com/code/since).
+A single HTML file, vanilla JS, and no dependencies. Calendar-aware date math derived from [`moment-precise-range`](https://github.com/codebox/moment-precise-range). Read the [Since blog post](https://jasonmorris.com/code/since).
 
 ## Examples
 
