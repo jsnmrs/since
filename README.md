@@ -4,7 +4,7 @@ Doing date math for all of those important moments. Hack the URL to create your 
 
 <https://jsnmrs.github.io/since/>
 
-Using [`moment.js`](https://momentjs.com/) + [`moment-precise-range`](https://github.com/codebox/moment-precise-range) + a little JS inspired by [this Stack Overflow reply](https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript#2880929). Read the [Since blog post](https://jasonmorris.com/code/since).
+A single HTML file, vanilla JS, and no dependencies. Calendar-aware date math derived from [`moment-precise-range`](https://github.com/codebox/moment-precise-range). Read the [Since blog post](https://jasonmorris.com/code/since).
 
 ## Examples
 
