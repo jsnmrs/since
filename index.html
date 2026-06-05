@@ -6,7 +6,6 @@
   <title>Since</title>
   <meta name="description" content="Doing date math for all of those important moments.">
   <meta name="author" content="Jason Morris">
-  <link rel="preconnect" href="https://unpkg.com">
   <style>
     *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{background-color:#f1f1f1;padding:1em}.faux-header{border-bottom:1px solid #ccc;margin-bottom:1.5em;}footer{border-top:1px solid #ccc;margin-top:1.5em;padding:3em 1em;}section{padding:0.25em 1em;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
     .icon{font-size: 10rem;margin:0;line-height:1;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {
@@ -38,43 +37,70 @@
     </section>
   </main>
   <footer><p>MIT Licensed. Read the <a href="https://jasonmorris.com/code/since/">Since blog post</a>. Source code on <a href="https://github.com/jsnmrs/since">GitHub</a>. Created by <a href="https://jasonmorris.com">Jason Morris</a>.</p></footer>
-  <script src="https://unpkg.com/moment/min/moment.min.js"></script>
-  <script src="moment-precise-range.js"></script>
   <script>
-    let then,
-        earl,
-        format = 'YYYY-MM-DD[T]HH:mm:ss';
+    const params = new URLSearchParams(location.search);
+    const label = params.get("label");
+    const then = params.get("then") ? parseLocal(params.get("then")) : null;
 
-    (window.onpopstate = function () {
-      let match,
-          plus   = /\+/g,
-          search = /([^&=]+)=?([^&]*)/g,
-          decode = function (s) { return decodeURIComponent(s.replace(plus, " ")); },
-          query  = window.location.search.substring(1);
-      earl = {};
-      while (match = search.exec(query))
-        earl[decode(match[1])] = decode(match[2]);
-    })();
-
-    if (earl.then) {
-      then = moment(earl.then, format);
-    }
-
-    if (earl.label) {
-      document.querySelector(".icon").textContent = earl.label;
+    if (label) {
+      document.querySelector(".icon").textContent = label;
       document.querySelector(".render").removeAttribute("hidden");
       document.querySelector(".examples").remove();
-      document.title = document.title + " " + earl.label;
+      document.title += " " + label;
     }
 
-    liveCount();
-
-    function liveCount() {
-      let now = moment().format(format),
-          diff = moment.preciseDiff(now, then);
-      document.querySelector(".since").textContent = diff;
+    if (then) {
+      const sinceEl = document.querySelector(".since");
+      const render = () => { sinceEl.textContent = formatDiff(preciseDiff(then, new Date())); };
+      render();
+      setInterval(render, 1000);
     }
-    setInterval(liveCount, 1000);
+
+    function parseLocal(str) {
+      const [datePart, timePart = "00:00:00"] = str.split("T");
+      const [y, m, d] = datePart.split("-").map(Number);
+      const [h, mi, s] = timePart.split(":").map(Number);
+      return new Date(y, m - 1, d, h, mi, s);
+    }
+
+    function preciseDiff(a, b) {
+      let [earlier, later] = a <= b ? [a, b] : [b, a];
+      // Shift earlier into later's UTC offset so DST or timezone-history
+      // changes between the two dates don't leak into the calendar math.
+      const offsetDelta = (earlier.getTimezoneOffset() - later.getTimezoneOffset()) * 60000;
+      earlier = new Date(earlier.getTime() + offsetDelta);
+
+      let years = later.getFullYear() - earlier.getFullYear();
+      let months = later.getMonth() - earlier.getMonth();
+      let days = later.getDate() - earlier.getDate();
+      let hours = later.getHours() - earlier.getHours();
+      let minutes = later.getMinutes() - earlier.getMinutes();
+      let seconds = later.getSeconds() - earlier.getSeconds();
+
+      if (seconds < 0) { seconds += 60; minutes--; }
+      if (minutes < 0) { minutes += 60; hours--; }
+      if (hours < 0) { hours += 24; days--; }
+      if (days < 0) {
+        // Borrow days from the calendar month before `later` (e.g. Jan 31 -> Mar 2).
+        const daysInPrevMonth = new Date(later.getFullYear(), later.getMonth(), 0).getDate();
+        days += daysInPrevMonth < earlier.getDate() ? earlier.getDate() : daysInPrevMonth;
+        months--;
+      }
+      if (months < 0) { months += 12; years--; }
+
+      return { years, months, days, hours, minutes, seconds };
+    }
+
+    function formatDiff(d) {
+      const units = [
+        ["year", d.years], ["month", d.months], ["day", d.days],
+        ["hour", d.hours], ["minute", d.minutes], ["second", d.seconds],
+      ];
+      return units
+        .filter(([, n]) => n)
+        .map(([name, n]) => `${n} ${name}${n === 1 ? "" : "s"}`)
+        .join(" ");
+    }
   </script>
 </body>
 </html>
