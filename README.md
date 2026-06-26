@@ -1,10 +1,10 @@
 # Since
 
-Doing date math for all of those important moments. Use the on-page builder to pick a date, optional time, and a label, or hack the URL directly. Either way, bookmark the result.
+A date math friend. Use the on-page builder to pick a date, optional time, and a label, or hack the URL directly. Either way, bookmark the result.
 
-<https://jsnmrs.github.io/since/>
+<https://code.jasonmorris.com/since/>
 
-A single HTML file, vanilla JS, and no dependencies. Calendar-aware date math derived from [`moment-precise-range`](https://github.com/codebox/moment-precise-range). Read the [Since blog post](https://jasonmorris.com/code/since).
+A single HTML file, vanilla JS, and no dependencies. Calendar-aware date math derived from [`moment-precise-range`](https://github.com/codebox/moment-precise-range).
 
 Released into the public domain ([Unlicense](https://unlicense.org)).
 
