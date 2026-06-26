@@ -16,21 +16,30 @@
   <meta name="description" content="A date math friend.">
   <meta name="author" content="Jason Morris">
   <style>
-    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{padding:1em}.faux-header{margin-bottom:1.5em;}footer{margin-top:3.5em;padding:3em 1em;}section{padding:0.25em 1em;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
-    .icon{font-size: 10rem;margin:0;line-height:1;}.icon.text{font-size:clamp(2rem, 8vw, 4rem);max-width:50rem;overflow-wrap:break-word;word-break:break-word;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {
-      font-size: 1.75rem;}.examples a {display:inline-block;padding:0.5em;}
-    .builder label{display:block;font-weight:bold;margin:0.75em 0 0.25em;}.builder .hint{font-weight:normal;color:#555;font-size:0.85em;}.builder fieldset{border:1px solid #ccc;margin:1em 0 0;padding:0.5em 1em 1em;}.builder legend{font-weight:bold;padding:0 0.5em;}.builder .group{display:flex;flex-wrap:wrap;gap:1em;}.builder .field{flex:1 1 6em;}.builder input,.builder select{font:inherit;padding:0.5em;width:100%;min-height:44px;}.builder input[type="text"]{max-width:20em;}.builder button{font:inherit;margin-top:1em;padding:0.5em 1.25em;min-height:44px;cursor:pointer;}
-    .result{margin-top:1.5em;}.result .url{display:flex;flex-wrap:wrap;gap:0.5em;align-items:center;}.result input{font:inherit;flex:1 1 18em;padding:0.5em;min-height:44px;}.result button{font:inherit;padding:0.5em 1em;min-height:44px;cursor:pointer;}
+    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{padding:1em}.faux-header{margin-bottom:1.5em;}footer{margin-top:3.5em;padding:3em 1em;}section{padding:1em 0;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
+    .icon{font-size: 10rem;margin:0;line-height:1;}.icon.text{font-size:clamp(2rem, 8vw, 4rem);max-width:50rem;overflow-wrap:break-word;word-break:break-word;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {font-size: 1.15rem;}.examples a {display:inline-block;padding:0.5em;}
+    .builder label{display:block;font-weight:bold;margin:0.75em 0 0.25em;}.builder .hint{font-weight:normal;color:#555;font-size:0.85em;}.builder fieldset{border:1px solid #555;margin:1em 0 0;padding:0.5em 1em 1em;}.builder legend{font-weight:bold;padding:0 0.5em;}.builder .group{display:flex;flex-wrap:wrap;gap:1em;}.builder .field{flex:1 1 6em;}.builder input,.builder select{font:inherit;padding:0.5em;width:100%;min-height:44px;}.builder input[type="text"]{max-width:20em;}.builder button{font:inherit;margin-top:1em;padding:0.5em 1.25em;min-height:44px;cursor:pointer;}
+    .result{margin-top:1.5em;}.result .url{display:flex;flex-wrap:wrap;gap:0.5em;align-items:center;}.result input{font:inherit;flex:1 1 18em;padding:0.5em;min-height:44px;}.result button{font:inherit;padding:0.5em 1em;min-height:44px;cursor:pointer;}main {
+      padding: 1rem;}
   </style>
 </head>
 <body>
   <main>
-    <div class="faux-header">
-      <h1>Since</h1>
-      <p>A date math friend.</p>
-    </div>
+    <h1>Since</h1>
+    <p>A date math friend.</p>
+    <section class="examples">
+      <p>For example:</p>
+      <ul>
+        <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">U.S. Independence Day</a></li>
+        <li><span aria-hidden="true">🏛 </span><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">Hill Valley clock tower lightning strike</a></li>
+        <li><span aria-hidden="true">🌖 </span><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">First moon landing</a></li>
+        <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=Mount St. Helens">Mount St. Helens eruption (1980)</a></li>
+        <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=Cheers">Final episode of <em>Cheers</em></a></li>
+      </ul>
+    </section>
     <section class="builder">
       <h2>Create a since</h2>
+      <p>Fill out the date fields below or start right <button type="button" id="now-button">now</button></p>
       <form id="builder-form">
         <label for="label">Label
           <span class="hint">An emoji or short text, up to 50 characters (e.g. 🎂 or Cheers).</span>
@@ -47,8 +56,7 @@
             <div class="field">
               <label for="month">Month</label>
               <select id="month" name="month" required>
-                <option value="" selected disabled>Month</option>
-                <option value="1">January</option>
+                <option value="1" selected>January</option>
                 <option value="2">February</option>
                 <option value="3">March</option>
                 <option value="4">April</option>
@@ -89,34 +97,21 @@
 
         <button type="submit">Create since</button>
       </form>
-
+    </section>
+    <section class="render" hidden>
+      <h1 class="icon"></h1>
+      <h2 class="since"></h2>
       <div class="result" hidden aria-live="polite">
         <p>Bookmark or share this link:</p>
         <div class="url">
           <input type="text" id="result-url" readonly>
           <button type="button" id="copy-button">Copy</button>
         </div>
-        <p><a id="open-link" href="#">Open this since <span aria-hidden="true">&rarr;</span></a></p>
       </div>
-    </section>
-    <section class="examples">
-      <p>Or hack the URL of the examples that follow to create your own "since" to bookmark.</p>
-      <ul>
-        <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">U.S. Independence Day</a></li>
-        <li><span aria-hidden="true">🏛 </span><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">Hill Valley clock tower lightning strike</a></li>
-        <li><span aria-hidden="true">🌖 </span><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">First moon landing</a></li>
-        <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=Mount St. Helens">Mount St. Helens eruption (1980)</a></li>
-        <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=Cheers">Final episode of <em>Cheers</em></a></li>
-      </ul>
-    </section>
-    <section class="render" hidden>
-      <h1 class="icon"></h1>
-      <h2 class="since"></h2>
     </section>
   </main>
   <footer>
-    <p><a href="./">Since</a>. A date math friend.</p>
-    <p>Released into the public domain via <a href="https://unlicense.org">Unlicense</a>. <a href="https://jasonmorris.com" aria-label="I, Jason Morris">I</a> put this on <a href="https://github.com/jsnmrs/since">GitHub</a> for you.</p>
+    <p><a href="./">Since</a>. A date math friend. Released into the public domain via <a href="https://unlicense.org">Unlicense</a>. <a href="https://jasonmorris.com" aria-label="I, Jason Morris">I</a> put this on <a href="https://github.com/jsnmrs/since">GitHub</a> for you.</p>
   </footer>
   <script>
     const params = new URLSearchParams(location.search);
@@ -129,10 +124,12 @@
       // A single emoji wants the big icon; longer text needs a smaller, wrapping size.
       if ([...label].length > 2) { icon.classList.add("text"); }
       document.querySelector(".render").removeAttribute("hidden");
-      document.querySelector(".faux-header").remove();
+      document.querySelector("main > h1").remove();
+      document.querySelector("main > p").remove();
       document.querySelector(".builder").remove();
       document.querySelector(".examples").remove();
       document.title = label + " (since)";
+      setupShare();
     } else {
       setupBuilder();
     }
@@ -146,10 +143,18 @@
 
     function setupBuilder() {
       const form = document.getElementById("builder-form");
-      const result = document.querySelector(".result");
-      const urlInput = document.getElementById("result-url");
-      const openLink = document.getElementById("open-link");
-      const copyButton = document.getElementById("copy-button");
+      const nowButton = document.getElementById("now-button");
+
+      nowButton.addEventListener("click", () => {
+        const now = new Date();
+        document.getElementById("label").value = "Since that moment it's been";
+        document.getElementById("year").value = now.getFullYear();
+        document.getElementById("month").value = now.getMonth() + 1;
+        document.getElementById("day").value = now.getDate();
+        document.getElementById("hour").value = now.getHours();
+        document.getElementById("minute").value = now.getMinutes();
+        document.getElementById("second").value = now.getSeconds();
+      });
 
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -169,13 +174,18 @@
         }
 
         const query = new URLSearchParams({ then, label: data.get("label") }).toString();
-        const url = location.origin + location.pathname + "?" + query;
 
-        urlInput.value = url;
-        openLink.href = url;
-        result.removeAttribute("hidden");
-        copyButton.textContent = "Copy";
+        // Navigate to the new since so it renders immediately.
+        location.search = "?" + query;
       });
+    }
+
+    function setupShare() {
+      const urlInput = document.getElementById("result-url");
+      const copyButton = document.getElementById("copy-button");
+
+      urlInput.value = location.href;
+      document.querySelector(".result").removeAttribute("hidden");
 
       copyButton.addEventListener("click", async () => {
         try {
