@@ -12,15 +12,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Since</title>
+  <title>(since)</title>
   <meta name="description" content="A date math friend.">
   <meta name="author" content="Jason Morris">
   <style>
-    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{padding:1em}.faux-header{margin-bottom:1.5em;}footer{margin-top:3.5em;padding:3em 1em;}section{padding:1em 0;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
+    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}:has(main *:focus){scroll-padding-top:3em;scroll-padding-bottom:3em;}footer{margin-top:3.5em;padding:3em 1em;}section{padding:1em 0;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
     .icon{font-size: 10rem;margin:0;line-height:1;}.icon.text{font-size:clamp(2rem, 8vw, 4rem);max-width:50rem;overflow-wrap:break-word;word-break:break-word;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {font-size: 1.15rem;}.examples a {display:inline-block;padding:0.5em;}
     .builder label{display:block;font-weight:bold;margin:0.75em 0 0.25em;}.builder .hint{font-weight:normal;color:#555;font-size:0.85em;}.builder fieldset{border:1px solid #555;margin:1em 0 0;padding:0.5em 1em 1em;}.builder legend{font-weight:bold;padding:0 0.5em;}.builder .group{display:flex;flex-wrap:wrap;gap:1em;}.builder .field{flex:1 1 6em;}.builder input,.builder select{font:inherit;padding:0.5em;width:100%;min-height:44px;}.builder input[type="text"]{max-width:20em;}.builder button{font:inherit;margin-top:1em;padding:0.5em 1.25em;min-height:44px;cursor:pointer;}
     .result{margin-top:1.5em;}.result .url{display:flex;flex-wrap:wrap;gap:0.5em;align-items:center;}.result input{font:inherit;flex:1 1 18em;padding:0.5em;min-height:44px;}.result button{font:inherit;padding:0.5em 1em;min-height:44px;cursor:pointer;}main {
-      padding: 1rem;}
+      padding: 1rem;}:focus-visible{outline:3px solid #1a73e8;outline-offset:2px;}#build-button:focus{outline:3px solid #1a73e8;outline-offset:2px;}.breathe{margin-top:2rem;}.visually-hidden:not(:focus):not(:focus-visible):not(:active) {clip:rect(0 0 0 0);clip-path: inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;}
   </style>
 </head>
 <body>
@@ -38,7 +38,7 @@
       </ul>
     </section>
     <section class="builder">
-      <h2>Create a since</h2>
+      <h2 id="create" tabindex="-1">Create a since</h2>
       <p>Fill out the date fields below or start right <button type="button" id="now-button">now</button></p>
       <form id="builder-form">
         <label for="label">Label
@@ -95,23 +95,25 @@
           </div>
         </fieldset>
 
-        <button type="submit">Create since</button>
+        <button id="build-button" type="submit">Create since</button>
       </form>
     </section>
     <section class="render" hidden>
       <h1 class="icon"></h1>
+      <p class="visually-hidden">the following heading updates once per second</p>
       <h2 class="since"></h2>
-      <div class="result" hidden aria-live="polite">
+      <div class="result" hidden>
         <p>Bookmark or share this link:</p>
         <div class="url">
           <input type="text" id="result-url" readonly>
-          <button type="button" id="copy-button">Copy</button>
+          <button type="button" id="copy-button" role="status">Copy</button>
         </div>
       </div>
+      <p class="breathe"><a href="./index.html">Make another one, if you want</a>.</p>
     </section>
   </main>
   <footer>
-    <p><a href="./">Since</a>. A date math friend. Released into the public domain via <a href="https://unlicense.org">Unlicense</a>. <a href="https://jasonmorris.com" aria-label="I, Jason Morris">I</a> put this on <a href="https://github.com/jsnmrs/since">GitHub</a> for you.</p>
+    <p><a href="./index.html">Since</a> is a date math friend. Released into the public domain via <a href="https://unlicense.org">Unlicense</a>. <a href="https://jasonmorris.com" aria-label="I, Jason Morris">I</a> put this on <a href="https://github.com/jsnmrs/since">GitHub</a> for you.</p>
   </footer>
   <script>
     const params = new URLSearchParams(location.search);
@@ -147,13 +149,14 @@
 
       nowButton.addEventListener("click", () => {
         const now = new Date();
-        document.getElementById("label").value = "Since that moment it's been";
+        document.getElementById("label").value = "Since then it’s been";
         document.getElementById("year").value = now.getFullYear();
         document.getElementById("month").value = now.getMonth() + 1;
         document.getElementById("day").value = now.getDate();
         document.getElementById("hour").value = now.getHours();
         document.getElementById("minute").value = now.getMinutes();
         document.getElementById("second").value = now.getSeconds();
+        document.getElementById("build-button").focus();
       });
 
       form.addEventListener("submit", (event) => {
