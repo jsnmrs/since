@@ -1,52 +1,139 @@
 <!DOCTYPE html>
+<!--
+  This is free and unencumbered software released into the public domain.
+
+  Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+  this software, either in source code form or as a compiled binary, for any
+  purpose, commercial or non-commercial, and by any means.
+
+  For more information, please refer to <https://unlicense.org>.
+-->
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Since</title>
-  <meta name="description" content="Doing date math for all of those important moments.">
+  <title>(since)</title>
+  <meta name="description" content="A date math friend.">
   <meta name="author" content="Jason Morris">
   <style>
-    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}.faux-header,footer{background-color:#f1f1f1;padding:1em}.faux-header{border-bottom:1px solid #ccc;margin-bottom:1.5em;}footer{border-top:1px solid #ccc;margin-top:1.5em;padding:3em 1em;}section{padding:0.25em 1em;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
-    .icon{font-size: 10rem;margin:0;line-height:1;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {
-      font-size: 1.75rem;}.examples a {display:inline-block;padding:0.5em;}
+    *{box-sizing:border-box}*::after,*::before{box-sizing:border-box}body{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";margin:0;padding:0;}:has(main *:focus){scroll-padding-top:3em;scroll-padding-bottom:3em;}footer{margin-top:3.5em;padding:3em 1em;}section{padding:1em 0;max-width:50em;}h1{margin:0}h2{margin:0 0 0.5em}p{line-height:1.4;margin:0.5em 0 0}
+    .icon{font-size: 10rem;margin:0;line-height:1;}.icon.text{font-size:clamp(2rem, 8vw, 4rem);max-width:50rem;overflow-wrap:break-word;word-break:break-word;}.since{font-size: 3rem; font-weight: bold; margin-bottom: 3rem;}.examples ul {padding:0;list-style-type:none;}.examples li {font-size: 1.15rem;}.examples a {display:inline-block;padding:0.5em;}
+    .builder label{display:block;font-weight:bold;margin:0.75em 0 0.25em;}.builder .hint{font-weight:normal;color:#555;font-size:0.85em;}.builder fieldset{border:1px solid #555;margin:1em 0 0;padding:0.5em 1em 1em;}.builder legend{font-weight:bold;padding:0 0.5em;}.builder .group{display:flex;flex-wrap:wrap;gap:1em;}.builder .field{flex:1 1 6em;}.builder input,.builder select{font:inherit;padding:0.5em;width:100%;min-height:44px;}.builder input[type="text"]{max-width:20em;}.builder button{font:inherit;margin-top:1em;padding:0.5em 1.25em;min-height:44px;cursor:pointer;}
+    .result{margin-top:1.5em;}.result .url{display:flex;flex-wrap:wrap;gap:0.5em;align-items:center;}.result input{font:inherit;flex:1 1 18em;padding:0.5em;min-height:44px;}.result button{font:inherit;padding:0.5em 1em;min-height:44px;cursor:pointer;}main {
+      padding: 1rem;}:focus-visible{outline:3px solid #1a73e8;outline-offset:2px;}#build-button:focus{outline:3px solid #1a73e8;outline-offset:2px;}.breathe{margin-top:2rem;}.visually-hidden:not(:focus):not(:focus-visible):not(:active) {clip:rect(0 0 0 0);clip-path: inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px;}
   </style>
 </head>
 <body>
   <main>
-    <div class="faux-header">
-      <h1>Since</h1>
-      <div class="info">
-        <p>Doing date math for all of those important moments.</p>
-      </div>
-    </div>
+    <h1>Since</h1>
+    <p>A date math friend.</p>
     <section class="examples">
-      <p>Hack the URL of the examples that follow to create your own "since" to bookmark.</p>
+      <p>For example:</p>
       <ul>
-        <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">Independence Day</a></li>
+        <li><span aria-hidden="true">🇺🇸 </span><a href="?then=1776-07-04&label=🇺🇸">U.S. Independence Day</a></li>
         <li><span aria-hidden="true">🏛 </span><a href="?then=1955-11-12T20%3A04%3A00&label=🏛">Hill Valley clock tower lightning strike</a></li>
         <li><span aria-hidden="true">🌖 </span><a href="?then=1969-07-20T20%3A18%3A00&label=🌖">First moon landing</a></li>
-        <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=🌋">Mount St. Helens eruption (1980)</a></li>
-        <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=🍻">Final episode of <em>Cheers</em></a></li>
+        <li><span aria-hidden="true">🌋 </span><a href="?then=1980-05-18T08%3A32%3A17&label=Mount St. Helens">Mount St. Helens eruption (1980)</a></li>
+        <li><span aria-hidden="true">🍻 </span><a href="?then=1993-05-23T21%3A22%3A00&label=Cheers">Final episode of <em>Cheers</em></a></li>
       </ul>
     </section>
+    <section class="builder">
+      <h2 id="create" tabindex="-1">Create a since</h2>
+      <p>Fill out the date fields below or start right <button type="button" id="now-button">now</button></p>
+      <form id="builder-form">
+        <label for="label">Label
+          <span class="hint">An emoji or short text, up to 50 characters (e.g. 🎂 or Cheers).</span>
+        </label>
+        <input type="text" id="label" name="label" maxlength="50" autocomplete="off" required>
+
+        <fieldset>
+          <legend>Date</legend>
+          <div class="group">
+            <div class="field">
+              <label for="year">Year</label>
+              <input type="number" id="year" name="year" inputmode="numeric" min="1" max="9999" required>
+            </div>
+            <div class="field">
+              <label for="month">Month</label>
+              <select id="month" name="month" required>
+                <option value="1" selected>January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="day">Day</label>
+              <input type="number" id="day" name="day" inputmode="numeric" min="1" max="31" required>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Time (optional)</legend>
+          <div class="group">
+            <div class="field">
+              <label for="hour">Hour</label>
+              <input type="number" id="hour" name="hour" inputmode="numeric" min="0" max="23" placeholder="0">
+            </div>
+            <div class="field">
+              <label for="minute">Minute</label>
+              <input type="number" id="minute" name="minute" inputmode="numeric" min="0" max="59" placeholder="0">
+            </div>
+            <div class="field">
+              <label for="second">Second</label>
+              <input type="number" id="second" name="second" inputmode="numeric" min="0" max="59" placeholder="0">
+            </div>
+          </div>
+        </fieldset>
+
+        <button id="build-button" type="submit">Create since</button>
+      </form>
+    </section>
     <section class="render" hidden>
-      <div class="icon"></div>
-      <p class="since"></p>
-      <p><a href="./"><span aria-hidden="true">&larr;</span> back to Since</a></p>
+      <h1 class="icon"></h1>
+      <p class="visually-hidden">the following heading updates once per second</p>
+      <h2 class="since"></h2>
+      <div class="result" hidden>
+        <p>Bookmark or share this link:</p>
+        <div class="url">
+          <input type="text" id="result-url" readonly>
+          <button type="button" id="copy-button" role="status">Copy</button>
+        </div>
+      </div>
+      <p class="breathe"><a href="./index.html">Make another one, if you want</a>.</p>
     </section>
   </main>
-  <footer><p>MIT Licensed. Read the <a href="https://jasonmorris.com/code/since/">Since blog post</a>. Source code on <a href="https://github.com/jsnmrs/since">GitHub</a>. Created by <a href="https://jasonmorris.com">Jason Morris</a>.</p></footer>
+  <footer>
+    <p><a href="./index.html">Since</a> is a date math friend. Released into the public domain via <a href="https://unlicense.org">Unlicense</a>. <a href="https://jasonmorris.com" aria-label="I, Jason Morris">I</a> put this on <a href="https://github.com/jsnmrs/since">GitHub</a> for you.</p>
+  </footer>
   <script>
     const params = new URLSearchParams(location.search);
     const label = params.get("label");
     const then = params.get("then") ? parseLocal(params.get("then")) : null;
 
     if (label) {
-      document.querySelector(".icon").textContent = label;
+      const icon = document.querySelector(".icon");
+      icon.textContent = label;
+      // A single emoji wants the big icon; longer text needs a smaller, wrapping size.
+      if ([...label].length > 2) { icon.classList.add("text"); }
       document.querySelector(".render").removeAttribute("hidden");
+      document.querySelector("main > h1").remove();
+      document.querySelector("main > p").remove();
+      document.querySelector(".builder").remove();
       document.querySelector(".examples").remove();
-      document.title += " " + label;
+      document.title = label + " (since)";
+      setupShare();
+    } else {
+      setupBuilder();
     }
 
     if (then) {
@@ -54,6 +141,64 @@
       const render = () => { sinceEl.textContent = formatDiff(preciseDiff(then, new Date())); };
       render();
       setInterval(render, 1000);
+    }
+
+    function setupBuilder() {
+      const form = document.getElementById("builder-form");
+      const nowButton = document.getElementById("now-button");
+
+      nowButton.addEventListener("click", () => {
+        const now = new Date();
+        document.getElementById("label").value = "Since then it’s been";
+        document.getElementById("year").value = now.getFullYear();
+        document.getElementById("month").value = now.getMonth() + 1;
+        document.getElementById("day").value = now.getDate();
+        document.getElementById("hour").value = now.getHours();
+        document.getElementById("minute").value = now.getMinutes();
+        document.getElementById("second").value = now.getSeconds();
+        document.getElementById("build-button").focus();
+      });
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const data = new FormData(form);
+        const pad = (n) => String(n).padStart(2, "0");
+
+        const year = data.get("year");
+        const month = pad(data.get("month"));
+        const day = pad(data.get("day"));
+        let then = `${year}-${month}-${day}`;
+
+        const hour = Number(data.get("hour")) || 0;
+        const minute = Number(data.get("minute")) || 0;
+        const second = Number(data.get("second")) || 0;
+        if (hour || minute || second) {
+          then += `T${pad(hour)}:${pad(minute)}:${pad(second)}`;
+        }
+
+        const query = new URLSearchParams({ then, label: data.get("label") }).toString();
+
+        // Navigate to the new since so it renders immediately.
+        location.search = "?" + query;
+      });
+    }
+
+    function setupShare() {
+      const urlInput = document.getElementById("result-url");
+      const copyButton = document.getElementById("copy-button");
+
+      urlInput.value = location.href;
+      document.querySelector(".result").removeAttribute("hidden");
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(urlInput.value);
+          copyButton.textContent = "Copied!";
+        } catch {
+          urlInput.select();
+          copyButton.textContent = "Press ⌘C to copy";
+        }
+      });
     }
 
     function parseLocal(str) {
